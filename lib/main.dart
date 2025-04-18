@@ -1,5 +1,6 @@
-import 'package:expez_app/screens/onboarding_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:expez_app/services/user_details_service.dart';
+import 'package:expez_app/widgets/wrapper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -13,13 +14,22 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'expez_app',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          fontFamily: "Inter",
-        ),
-        debugShowCheckedModeBanner: false,
-        home: OnBoardingScreen());
+    return FutureBuilder(
+      future: UserService.checkUsername(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        } else {
+          bool hasUsername = snapshot.data ?? false;
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(fontFamily: "Inter"),
+            home: Wrapper(
+              showMainScreen: hasUsername,
+            ),
+          );
+        }
+      },
+    );
   }
 }
