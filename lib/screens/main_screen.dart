@@ -150,10 +150,10 @@ class _MainScreenState extends State<MainScreen> {
         expensesList: expensesList,
       ),
       TransactionsScreen(
-        // expensesList: expensesList,
-        // onDismissedExpenses: deleteExpense,
-        // incomeList: incomesList,
-        // onDismissedIncome: deleteIncome,
+        expensesList: expensesList,
+        onDismissedExpenses: deleteExpense,
+        incomeList: incomesList,
+        onDismissedIncome: deleteIncome,
       ),
       AddNewScreen(
         addExpense: addNewExpense,
