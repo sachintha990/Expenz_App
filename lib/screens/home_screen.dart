@@ -5,6 +5,7 @@ import 'package:expez_app/utils/colors.dart';
 import 'package:expez_app/utils/constants.dart';
 import 'package:expez_app/widgets/expence_card.dart';
 import 'package:expez_app/widgets/income_exp_chip.dart';
+import 'package:expez_app/widgets/line_chart.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -160,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     //chart to show the spend frequency and the amount spent in a chart using fl_chart
 
-                    //LineChartSample()
+                    LineChartSample()
                   ],
                 ),
               ),
