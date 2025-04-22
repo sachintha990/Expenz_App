@@ -147,7 +147,9 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final List<Widget> pages = [
       HomeScreen(
-        expensesList: expensesList,
+        
+        expensesList: expensesList, 
+        incomeList: incomesList,
       ),
       TransactionsScreen(
         expensesList: expensesList,
@@ -160,8 +162,8 @@ class _MainScreenState extends State<MainScreen> {
         addIcome: addNewIncome,
       ),
       BudgetScreen(
-        // expenseCategoryTotals: calculateExpensesCategories(),
-        // incomeCategoryTotals: calculateIncomeCategories(),
+        expenseCategoryTotals: calculateExpensesCategories(),
+        incomeCategoryTotals: calculateIncomeCategories(),
       ),
       const ProfileScreen(),
     ];

@@ -1,4 +1,5 @@
 import 'package:expez_app/models/expence_model.dart';
+import 'package:expez_app/models/income_model.dart';
 import 'package:expez_app/services/user_details_service.dart';
 import 'package:expez_app/utils/colors.dart';
 import 'package:expez_app/utils/constants.dart';
@@ -8,9 +9,11 @@ import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
   final List<Expense> expensesList;
+  final List<Income> incomeList;
   const HomeScreen({
     super.key,
     required this.expensesList,
+    required this.incomeList,
   });
 
   @override
@@ -20,6 +23,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String username = "";
   String email = "";
+  double expenseTotal = 0.0;
+  double incomeTotal = 0.0;
 
   @override
   void initState() {
@@ -34,6 +39,17 @@ class _HomeScreenState extends State<HomeScreen> {
         });
       }
     });
+
+    setState(() {
+      for (var i = 0; i < widget.expensesList.length; i++) {
+        expenseTotal += widget.expensesList[i].amount;
+      }
+
+      for (var k = 0; k < widget.incomeList.length; k++) {
+        incomeTotal += widget.incomeList[k].amount;
+      }
+    });
+
     super.initState();
   }
 
@@ -102,18 +118,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Row(
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IncomeExpenceChip(
                             title: "Income",
-                            amount: 5000,
+                            amount: incomeTotal,
                             bgColor: kGreen,
                             imageUrl: "assets/images/income.png",
                           ),
                           IncomeExpenceChip(
                             title: "Expense",
-                            amount: 1200,
+                            amount: expenseTotal,
                             bgColor: kRed,
                             imageUrl: "assets/images/expense.png",
                           )
@@ -144,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                     //chart to show the spend frequency and the amount spent in a chart using fl_chart
 
-                   // LineChartSample()
+                    //LineChartSample()
                   ],
                 ),
               ),
